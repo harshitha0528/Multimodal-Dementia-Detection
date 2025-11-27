@@ -1,0 +1,13 @@
+git clone https://github.com/<your-username>/Multimodal-Dementia-Detection.git
+cd Multimodal-Dementia-Detection
+
+
+python -m venv venv
+source venv/bin/activate    # Mac
+venv\Scripts\activate       # Windows
+
+
+pip install -r requirements.txt
+
+
+streamlit run app.py

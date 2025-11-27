@@ -1,0 +1,16 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+torch
+torchvision
+torchaudio
+monai
+nibabel
+librosa
+tqdm
+transformers
+soundfile
+streamlit
+fastapi
+uvicorn
