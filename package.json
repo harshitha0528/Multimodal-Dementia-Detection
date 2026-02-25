@@ -1,0 +1,14 @@
+{
+  "name": "multimodal-dementia-detection",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently -n BACKEND,FRONTEND -c blue,green \"venv\\Scripts\\python -m uvicorn backend.main:app --reload --reload-dir backend --port 8000\" \"npm --prefix frontend run dev\"",
+    "dev:backend": "venv\\Scripts\\python -m uvicorn backend.main:app --reload --reload-dir backend --port 8000",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "install:frontend": "npm --prefix frontend install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

@@ -8,6 +8,8 @@ venv\Scripts\activate       # Windows
 
 
 pip install -r requirements.txt
+npm install
+npm run install:frontend
 
 
-streamlit run app.py
+npm run dev

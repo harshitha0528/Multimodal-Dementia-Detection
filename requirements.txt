@@ -11,6 +11,5 @@ librosa
 tqdm
 transformers
 soundfile
-streamlit
 fastapi
 uvicorn

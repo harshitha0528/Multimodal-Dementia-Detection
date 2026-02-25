@@ -1,0 +1,11 @@
+# Command to run MRI Image Accuracy Evaluation
+
+Run this command in your terminal:
+
+cd Multimodal-Dementia-Detection; $env:PYTHONPATH="."; venv\Scripts\python src/evaluate_image.py --model_path outputs/best_model.pth --data_root data/processed
+
+This will:
+- Load the trained MRI model from outputs/best_model.pth
+- Evaluate on the test dataset (6060 samples)
+- Display accuracy, precision, recall, F1-score for each class
+- Save confusion matrix to outputs/confusion_matrix.png
