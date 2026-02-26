@@ -6,7 +6,7 @@ function CognitivePage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { mri, audio } = location.state || {};
+  const { mri, audio, patientName, age, gender, mobileNumber, city } = location.state || {};
 
   const [showImage, setShowImage] = useState(true);
   const [timeLeft, setTimeLeft] = useState(20);
@@ -15,26 +15,33 @@ function CognitivePage() {
   const questions = [
     {
       id: "q1",
-      question: "How many people were in the image?",
+      question: "How many elderly people were sitting on the bench?",
       options: ["1", "2", "3", "4"],
       correct: "2",
     },
     {
       id: "q2",
-      question: "What was the boy doing?",
-      options: [
-        "Washing dishes",
-        "Taking cookies",
-        "Cleaning floor",
-        "Eating at table",
-      ],
-      correct: "Taking cookies",
+      question: "What was the girl riding?",
+      options: ["Scooter", "Bicycle", "Car", "Skateboard"],
+      correct: "Bicycle",
     },
     {
       id: "q3",
-      question: "Was water overflowing?",
-      options: ["Yes", "No"],
-      correct: "Yes",
+      question: "What was located in the center of the park?",
+      options: ["Statue", "Fountain", "Playground", "Tree"],
+      correct: "Fountain",
+    },
+    {
+      id: "q4",
+      question: "What animals were in the pond?",
+      options: ["Dogs", "Cats", "Ducks", "Fish"],
+      correct: "Ducks",
+    },
+    {
+      id: "q5",
+      question: "What was the boy riding?",
+      options: ["Bicycle", "Scooter", "Horse", "Car"],
+      correct: "Scooter",
     },
   ];
 
@@ -56,55 +63,69 @@ function CognitivePage() {
   };
 
   const handleSubmit = () => {
-  let score = 0;
+    let score = 0;
 
-  questions.forEach((q) => {
-    if (answers[q.id] === q.correct) {
-      score++;
-    }
-  });
+    questions.forEach((q) => {
+      if (answers[q.id] === q.correct) {
+        score++;
+      }
+    });
 
-  const cognitiveScore = score / questions.length;
+    const cognitiveScore = score / questions.length;
 
-  console.log("Navigating with:", { mri, audio, cognitiveScore });
+    navigate("/result", {
+      state: { mri, audio, cognitiveScore, patientName, age, gender, mobileNumber, city },
+    });
+  };
 
-  navigate("/result", {
-    state: { mri, audio, cognitiveScore },
-  });
-};
+  const allAnswered = questions.every((q) => Boolean(answers[q.id]));
+
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Cognitive Visual Test</h2>
+    <div className="cognitiveShell">
+      <div className="cognitiveTop">
+        <h2>NeuroFusion AI</h2>
+      </div>
 
-      {showImage ? (
-        <div>
-          <p>Observe carefully. Time left: {timeLeft}s</p>
-          <img src={testImage} alt="Test" width="500" />
-        </div>
-      ) : (
-        <div>
-          {questions.map((q) => (
-            <div key={q.id}>
-              <p>{q.question}</p>
-              {q.options.map((opt) => (
-                <label key={opt} style={{ marginRight: "10px" }}>
-                  <input
-                    type="radio"
-                    name={q.id}
-                    value={opt}
-                    onChange={() => handleChange(q.id, opt)}
-                  />
-                  {opt}
-                </label>
-              ))}
-            </div>
-          ))}
+      <div className="cognitiveBody">
+        {showImage ? (
+          <div className="cognitivePreview">
+            <div className="timerBadge">Time left: {timeLeft}s</div>
+            <img src={testImage} alt="Memory Test" className="cognitiveMainImage" />
+          </div>
+        ) : (
+          <div className="mcqWrap">
+            <h3>Visual Memory Questions</h3>
+            {questions.map((q, index) => (
+              <article key={q.id} className="mcqCard">
+                <p className="mcqTitle">
+                  <span>{`Q${index + 1}`}</span> {q.question}
+                </p>
+                <div className="mcqOptions">
+                  {q.options.map((opt) => {
+                    const isSelected = answers[q.id] === opt;
+                    return (
+                      <label key={opt} className={`mcqPill ${isSelected ? "selected" : ""}`}>
+                        <input
+                          type="radio"
+                          name={q.id}
+                          value={opt}
+                          checked={isSelected}
+                          onChange={() => handleChange(q.id, opt)}
+                        />
+                        <span>{opt}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </article>
+            ))}
 
-          <button onClick={handleSubmit}>
-            Run Analysis
-          </button>
-        </div>
-      )}
+            <button onClick={handleSubmit} className="mcqSubmit" disabled={!allAnswered}>
+              Run Analysis {"->"}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

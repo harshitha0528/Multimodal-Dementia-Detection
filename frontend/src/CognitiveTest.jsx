@@ -5,33 +5,39 @@ function CognitiveTest({ onScoreCalculated }) {
   const [showImage, setShowImage] = useState(true);
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(20);
-
+  <h1 style={{color: "red"}}>THIS IS NEW VERSION</h1>
   const questions = [
-    {
-      id: "q1",
-      question: "How many people were in the image?",
-      options: ["1", "2", "3", "4"],
-      correct: "2",
-    },
-    {
-      id: "q2",
-      question: "What was the boy doing?",
-      options: [
-        "Washing dishes",
-        "Taking cookies",
-        "Cleaning floor",
-        "Eating at table",
-      ],
-      correct: "Taking cookies",
-    },
-    {
-      id: "q3",
-      question: "Was water overflowing from the sink?",
-      options: ["Yes", "No"],
-      correct: "Yes",
-    },
-  ];
-
+  {
+    id: "q1",
+    question: "How many elderly people were sitting on the bench?",
+    options: ["1", "2", "3", "4"],
+    correct: "2",
+  },
+  {
+    id: "q2",
+    question: "What was the girl riding?",
+    options: ["Scooter", "Bicycle", "Car", "Skateboard"],
+    correct: "Bicycle",
+  },
+  {
+    id: "q3",
+    question: "What was located in the center of the park?",
+    options: ["Statue", "Fountain", "Playground", "Tree"],
+    correct: "Fountain",
+  },
+  {
+    id: "q4",
+    question: "What animals were in the pond?",
+    options: ["Dogs", "Cats", "Ducks", "Fish"],
+    correct: "Ducks",
+  },
+  {
+    id: "q5",
+    question: "What was the boy riding?",
+    options: ["Bicycle", "Scooter", "Horse", "Car"],
+    correct: "Scooter",
+  },
+];
   // Timer logic
   useEffect(() => {
     if (showImage && timeLeft > 0) {

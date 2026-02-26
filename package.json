@@ -3,8 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently -n BACKEND,FRONTEND -c blue,green \"venv\\Scripts\\python -m uvicorn backend.main:app --reload --reload-dir backend --port 8000\" \"npm --prefix frontend run dev\"",
-    "dev:backend": "venv\\Scripts\\python -m uvicorn backend.main:app --reload --reload-dir backend --port 8000",
+    "dev": "concurrently -n BACKEND,FRONTEND -c blue,green \"venv\\Scripts\\python -m uvicorn backend.main:app --port 8010\" \"npm --prefix frontend run dev\"",
+    "dev:backend": "venv\\Scripts\\python -m uvicorn backend.main:app --port 8010",
+    "dev:backend:reload": "venv\\Scripts\\python -m uvicorn backend.main:app --reload --reload-dir backend --reload-exclude backend/venv/* --reload-exclude backend/__pycache__/* --port 8010",
     "dev:frontend": "npm --prefix frontend run dev",
     "install:frontend": "npm --prefix frontend install"
   },
