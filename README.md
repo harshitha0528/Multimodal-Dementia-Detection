@@ -36,11 +36,7 @@ Frontend runs on `http://localhost:5173` and proxies `/api/*` to backend `http:/
 ## API request
 
 `POST /predict` with `multipart/form-data`:
-- `mri_file` (required): jpg/jpeg/png
-- `audio_file` (optional): wav/mp3
-- `cognitive_score` (optional, default `10`, range `0-20`)
+- `mri_file` : jpg/jpeg/png
+- `audio_file` : wav/mp3
+- `cognitive_score` 
 
-## Notes
-
-- Current audio path is placeholder (`dummy` probabilities), same as the previous Streamlit behavior.
-- Existing Streamlit app file (`app.py`) is kept for reference, but new UI flow is React + FastAPI.
